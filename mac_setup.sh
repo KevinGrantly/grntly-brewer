@@ -188,7 +188,8 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   export PATH="/opt/homebrew/bin:$PATH"
-  grep -q 'brew shellenv' ~/.bash_profile || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc  # Toegevoegd voor Zsh
 else
   echo "[FOUT] Homebrew installatie lijkt mislukt. Pad niet gevonden."
   exit 1
