@@ -2,7 +2,7 @@
 
 # ----------------------
 # Grantly Mac Setup Script v4.2
-# Voor Mac Installs M4 staging & onboarding (inclusief rollback optie) nieuw
+# Voor Mac Installs M4 staging & onboarding (inclusief rollback optie)
 # ----------------------
 
 # === Functie: Rollback uitvoeren ===
@@ -196,10 +196,8 @@ fi
 
 brew update --force --quiet
 
-sudo dseditgroup -o create brewadmin
-sudo dseditgroup -o edit -a $adminUsername -t user brewadmin
-sudo chown -R root:brewadmin /opt/homebrew
-sudo chmod -R 770 /opt/homebrew
+sudo chown -R $adminUsername:admin /opt/homebrew
+sudo chmod -R 775 /opt/homebrew
 
 brew analytics off
 brew update
@@ -236,7 +234,7 @@ sleep 2
 # === Conditional software install ===
 echo "Installaties voor $UserType"
 
-brew install dockutil || echo "[WAARSCHUWING] dockutil kon niet worden geïnstalleerd."
+sudo -u $adminUsername brew install dockutil || echo "[WAARSCHUWING] dockutil kon niet worden geïnstalleerd."
 
 if command -v dockutil &> /dev/null; then
   dockutil --remove all --no-restart
